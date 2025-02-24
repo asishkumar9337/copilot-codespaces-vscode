@@ -1,0 +1,25 @@
+import tkinter as tk from tkinter import messagebox
+
+def calculate_emi(): try: principal = float(principal_entry.get()) rate = float(rate_entry.get()) / 100 / 12  # Monthly interest rate time = int(time_entry.get()) * 12  # Convert years to months
+
+emi = (principal * rate * (1 + rate) ** time) / ((1 + rate) ** time - 1)
+    result_label.config(text=f"EMI: {emi:.2f} per month")
+except ValueError:
+    messagebox.showerror("Input Error", "Please enter valid numerical values.")
+
+GUI Setup
+
+root = tk.Tk() root.title("Financial Calculator") root.geometry("300x250")
+
+tk.Label(root, text="Principal Amount:").pack() principal_entry = tk.Entry(root) principal_entry.pack()
+
+tk.Label(root, text="Annual Interest Rate (%):").pack() rate_entry = tk.Entry(root) rate_entry.pack()
+
+tk.Label(root, text="Loan Term (Years):").pack() time_entry = tk.Entry(root) time_entry.pack()
+
+tk.Button(root, text="Calculate EMI", command=calculate_emi).pack()
+
+result_label = tk.Label(root, text="") result_label.pack()
+
+root.mainloop()
+
